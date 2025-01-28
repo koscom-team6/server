@@ -1,0 +1,85 @@
+package koscom.team6.config;
+
+import koscom.team6.jwt.JwtFilter;
+import koscom.team6.jwt.JwtUtil;
+import koscom.team6.jwt.LoginFilter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final AuthenticationConfiguration authenticationConfiguration;
+
+    private final JwtUtil jwtUtil;
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JwtUtil jwtUtil) {
+
+        this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtUtil = jwtUtil;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // csrf disable
+        http
+                .csrf((auth) -> auth.disable());
+
+        // form 로그인 disable
+        http
+                .formLogin((auth) -> auth.disable());
+
+        //http basic 증 disable
+        http
+                .httpBasic((auth) -> auth.disable());
+
+        // 경로별 Authorization
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/api").authenticated()
+                        .anyRequest().permitAll());
+
+        // JWT 사용 위해 세션 Stateless 설정
+        http
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
+
+        // h2 사용시에만 동일 출처에서의 iframe 허용
+        http
+                .headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions
+                        .sameOrigin()
+                ));
+
+        return http.build();
+    }
+
+}
