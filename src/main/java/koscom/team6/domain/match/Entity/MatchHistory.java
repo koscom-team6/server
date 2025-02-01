@@ -1,7 +1,7 @@
-package koscom.team6.domain.match.domain;
+package koscom.team6.domain.match.Entity;
 
 import jakarta.persistence.*;
-import koscom.team6.Entity.UserEntity;
+import koscom.team6.domain.user.Entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

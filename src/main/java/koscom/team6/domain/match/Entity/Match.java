@@ -1,4 +1,4 @@
-package koscom.team6.domain.match.domain;
+package koscom.team6.domain.match.Entity;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

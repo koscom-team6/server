@@ -1,9 +1,9 @@
 package koscom.team6.domain.match.service;
 
-import koscom.team6.Entity.UserEntity;
-import koscom.team6.domain.match.domain.Match;
-import koscom.team6.domain.match.domain.MatchAnswer;
-import koscom.team6.domain.match.domain.MatchHistory;
+import koscom.team6.domain.user.Entity.UserEntity;
+import koscom.team6.domain.match.Entity.Match;
+import koscom.team6.domain.match.Entity.MatchAnswer;
+import koscom.team6.domain.match.Entity.MatchHistory;
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
 import koscom.team6.domain.match.dto.request.PracticeResultRequest;
 import koscom.team6.domain.match.dto.response.MatchResponse;
@@ -14,8 +14,8 @@ import koscom.team6.domain.match.repository.MatchAnswerRepository;
 import koscom.team6.domain.match.repository.MatchHistoryRepository;
 import koscom.team6.domain.match.repository.MatchRepository;
 import koscom.team6.domain.match.vo.MatchResultVO;
-import koscom.team6.dto.CustomUserDetails;
-import koscom.team6.repository.UserRepository;
+import koscom.team6.domain.user.dto.CustomUserDetails;
+import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

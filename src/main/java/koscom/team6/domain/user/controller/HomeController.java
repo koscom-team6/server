@@ -1,4 +1,4 @@
-package koscom.team6.controller;
+package koscom.team6.domain.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

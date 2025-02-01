@@ -1,10 +1,9 @@
-package koscom.team6.controller;
+package koscom.team6.domain.user.controller;
 
-import koscom.team6.dto.UserRankingResponse;
-import koscom.team6.service.UserService;
+import koscom.team6.domain.user.dto.UserRankingResponse;
+import koscom.team6.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -1,4 +1,4 @@
-package koscom.team6.Entity;
+package koscom.team6.domain.user.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

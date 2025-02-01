@@ -1,6 +1,6 @@
-package koscom.team6.repository;
+package koscom.team6.domain.user.repository;
 
-import koscom.team6.Entity.UserEntity;
+import koscom.team6.domain.user.Entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package koscom.team6.jwt;
+package koscom.team6.global.jwt;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

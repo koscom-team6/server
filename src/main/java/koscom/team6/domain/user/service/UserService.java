@@ -1,9 +1,9 @@
-package koscom.team6.service;
+package koscom.team6.domain.user.service;
 
-import koscom.team6.Entity.UserEntity;
-import koscom.team6.dto.JoinRequest;
-import koscom.team6.dto.UserRankingResponse;
-import koscom.team6.repository.UserRepository;
+import koscom.team6.domain.user.Entity.UserEntity;
+import koscom.team6.domain.user.dto.JoinRequest;
+import koscom.team6.domain.user.dto.UserRankingResponse;
+import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

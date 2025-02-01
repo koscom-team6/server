@@ -1,8 +1,8 @@
-package koscom.team6.service;
+package koscom.team6.domain.user.service;
 
-import koscom.team6.Entity.UserEntity;
-import koscom.team6.dto.CustomUserDetails;
-import koscom.team6.repository.UserRepository;
+import koscom.team6.domain.user.Entity.UserEntity;
+import koscom.team6.domain.user.dto.CustomUserDetails;
+import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

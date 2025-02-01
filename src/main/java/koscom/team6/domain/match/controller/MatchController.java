@@ -1,4 +1,4 @@
-package koscom.team6.domain.match;
+package koscom.team6.domain.match.controller;
 
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
 import koscom.team6.domain.match.dto.request.PracticeResultRequest;
@@ -7,7 +7,7 @@ import koscom.team6.domain.match.dto.response.MatchResultResponse;
 import koscom.team6.domain.match.dto.response.PracticeResponse;
 import koscom.team6.domain.match.dto.response.PracticeResultResponse;
 import koscom.team6.domain.match.service.MatchService;
-import koscom.team6.dto.CustomUserDetails;
+import koscom.team6.domain.user.dto.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
