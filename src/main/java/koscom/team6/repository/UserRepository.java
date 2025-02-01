@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     UserEntity findByUsername(String username);
 
     List<UserEntity> findAllByOrderByScoreDescSolvedCountAsc();
+
+    UserEntity findById(Long rivalId);
 }

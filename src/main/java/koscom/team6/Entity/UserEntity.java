@@ -26,4 +26,18 @@ public class UserEntity {
 
     private int solvedCount;
 
+    private int winningCount;
+
+    private String image;
+
+    public void setWinner(int score) {
+        this.score += score;
+        this.solvedCount += 1;
+        this.winningCount += 1;
+    }
+
+    public void setLoser() {
+        this.solvedCount += 1;
+    }
+
 }
