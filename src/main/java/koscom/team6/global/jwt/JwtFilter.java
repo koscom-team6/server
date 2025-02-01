@@ -25,7 +25,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+        String requestURI = request.getRequestURI();
+        if (requestURI.startsWith("/ws-") || requestURI.startsWith("/matching")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         // request에서 Authorization 헤더를 찾음
         String authorization= request.getHeader("Authorization");
 

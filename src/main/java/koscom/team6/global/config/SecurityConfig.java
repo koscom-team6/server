@@ -13,6 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -39,10 +44,24 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
 
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("Authorization"));
+
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
         // csrf disable
         http
                 .csrf((auth) -> auth.disable());
@@ -58,6 +77,7 @@ public class SecurityConfig {
         // 경로별 Authorization
         http
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/ws-match/**" ,"/ws-chat/**").permitAll()
                         .requestMatchers("/api").authenticated()
                         .anyRequest().permitAll());
 
