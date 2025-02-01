@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -38,9 +40,9 @@ public class MatchingService {
             System.out.println("player2Id = " + player2Id);
 
             if (player1Id != null && player2Id != null) {
-
+                String matchSessionId = UUID.randomUUID().toString();
                 // 매칭 결과를 WebSocket을 통해 전송
-                messagingTemplate.convertAndSend("/sub/matching", new MatchingResponse(player1Id, player2Id));
+                messagingTemplate.convertAndSend("/sub/matching", new MatchingResponse(player1Id, player2Id, matchSessionId));
             }
         }
 
