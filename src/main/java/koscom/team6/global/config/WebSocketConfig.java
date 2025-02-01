@@ -26,11 +26,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
         // client에서 websocket 연결할 때 사용 API - 대결 답안용
         registry.addEndpoint("/ws-chat")
-                .setAllowedOriginPatterns("*");
+                .setAllowedOriginPatterns("*")
+                        .withSockJS();
 
         // client에서 websocket 연결할 때 사용 API - 대결 매칭용
         registry.addEndpoint("/ws-match")
-                .setAllowedOriginPatterns("*");
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
 
     }
 }
