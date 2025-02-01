@@ -1,11 +1,11 @@
-package koscom.team6.jwt;
+package koscom.team6.global.jwt;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import koscom.team6.dto.CustomUserDetails;
+import koscom.team6.domain.user.dto.CustomUserDetails;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

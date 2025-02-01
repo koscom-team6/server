@@ -1,11 +1,11 @@
-package koscom.team6.jwt;
+package koscom.team6.global.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import koscom.team6.Entity.UserEntity;
-import koscom.team6.dto.CustomUserDetails;
+import koscom.team6.domain.user.Entity.UserEntity;
+import koscom.team6.domain.user.dto.CustomUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,6 +1,6 @@
 package koscom.team6.domain.match.dto.response;
 
-import koscom.team6.domain.match.domain.Match;
+import koscom.team6.domain.match.Entity.Match;
 import lombok.Builder;
 import lombok.Getter;
 

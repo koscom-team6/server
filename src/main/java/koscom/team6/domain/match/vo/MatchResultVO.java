@@ -1,6 +1,6 @@
 package koscom.team6.domain.match.vo;
 
-import koscom.team6.domain.match.domain.MatchAnswer;
+import koscom.team6.domain.match.Entity.MatchAnswer;
 import lombok.Builder;
 import lombok.Getter;
 

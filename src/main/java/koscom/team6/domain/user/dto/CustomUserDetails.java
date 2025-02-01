@@ -1,10 +1,9 @@
-package koscom.team6.dto;
+package koscom.team6.domain.user.dto;
 
-import koscom.team6.Entity.UserEntity;
+import koscom.team6.domain.user.Entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {

@@ -1,8 +1,8 @@
-package koscom.team6.controller;
+package koscom.team6.domain.user.controller;
 
-import koscom.team6.Entity.UserEntity;
-import koscom.team6.dto.JoinRequest;
-import koscom.team6.service.UserService;
+import koscom.team6.domain.user.Entity.UserEntity;
+import koscom.team6.domain.user.dto.JoinRequest;
+import koscom.team6.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

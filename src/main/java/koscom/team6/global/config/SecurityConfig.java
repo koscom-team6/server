@@ -1,8 +1,8 @@
-package koscom.team6.config;
+package koscom.team6.global.config;
 
-import koscom.team6.jwt.JwtFilter;
-import koscom.team6.jwt.JwtUtil;
-import koscom.team6.jwt.LoginFilter;
+import koscom.team6.global.jwt.JwtFilter;
+import koscom.team6.global.jwt.JwtUtil;
+import koscom.team6.global.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

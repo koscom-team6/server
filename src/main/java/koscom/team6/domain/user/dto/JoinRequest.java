@@ -1,4 +1,4 @@
-package koscom.team6.dto;
+package koscom.team6.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
