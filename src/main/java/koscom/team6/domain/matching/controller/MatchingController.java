@@ -26,6 +26,12 @@ public class MatchingController {
 
     }
 
+    @MessageMapping("/typing")
+    @SendTo("/sub/typing")
+    public TypingStatus handleTypingStatus(TypingStatus status) {
+        return status;
+    }
+
     @PostMapping("/matching")
     public ResponseEntity<?> requestMatching(@RequestBody MatchingUserRequest request) {
 
