@@ -20,16 +20,20 @@ public class MatchingController {
 
     @MessageMapping("/chat")
     @SendTo("/sub/chat")
-    public AnswerResponse sendMsg(AnswerRequest request) {
+    public ResponseEntity<AnswerResponse> sendMsg(AnswerRequest request) {
 
-        return new AnswerResponse(request.getPlayerId(), request.getContent());
+        AnswerResponse answerResponse = new AnswerResponse(request.getPlayerId(), request.getContent(), true);
 
+        return ResponseEntity.ok(answerResponse);
     }
 
     @MessageMapping("/typing")
     @SendTo("/sub/typing")
-    public TypingStatus handleTypingStatus(TypingStatus status) {
-        return status;
+    public ResponseEntity<TypingResponseStatus> handleTypingStatus(TypingRequestStatus status) {
+
+        TypingResponseStatus typingResponseStatus = new TypingResponseStatus(status.getPlayerId(), true);
+
+        return ResponseEntity.ok(typingResponseStatus);
     }
 
     @PostMapping("/matching")
@@ -42,9 +46,11 @@ public class MatchingController {
 
     @MessageMapping("/matching")
     @SendTo("/sub/matching")
-    public MatchingResponse startMatching(MatchingStartRequest request) {
+    public ResponseEntity<MatchingResponse> startMatching(MatchingStartRequest request) {
 
-        return new MatchingResponse(request.getPlayer1Id(), request.getPlayer2Id());
+        MatchingResponse matchingResponse = new MatchingResponse(request.getPlayer1Id(), request.getPlayer2Id());
+
+        return ResponseEntity.ok(matchingResponse);
     }
 
 }

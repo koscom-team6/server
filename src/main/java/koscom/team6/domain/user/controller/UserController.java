@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping("/join")
     public ResponseEntity<?> joinProcess(@RequestBody JoinRequest joinRequest) {
 
-        System.out.println(joinRequest.getUsername());
+//        System.out.println(joinRequest.getUsername());
         UserEntity saved = userService.joinProcess(joinRequest);
 
         return ResponseEntity.ok(saved);

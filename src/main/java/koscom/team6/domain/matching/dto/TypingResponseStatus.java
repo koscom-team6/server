@@ -1,9 +1,14 @@
 package koscom.team6.domain.matching.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class TypingStatus {
+@AllArgsConstructor
+public class TypingResponseStatus {
+
+    private int playerId;
 
     private boolean isTyping;
+
 }
