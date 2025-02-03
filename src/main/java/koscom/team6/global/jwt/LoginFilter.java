@@ -1,5 +1,7 @@
 package koscom.team6.global.jwt;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import jakarta.servlet.FilterChain;
@@ -20,6 +22,8 @@ import java.io.InputStreamReader;
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private final JwtUtil jwtUtil;
 
@@ -52,9 +56,20 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String username = customUserDetails.getUsername();
 
-        String token = jwtUtil.createJwt(username, 60*60*10L);
+        String token = jwtUtil.createJwt(username, 999999999999999L);
 
         response.addHeader("Authorization", "Bearer " + token);
+
+        String result = null;
+        try {
+            result = objectMapper.writeValueAsString(customUserDetails);
+            response.getWriter().write(result);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
