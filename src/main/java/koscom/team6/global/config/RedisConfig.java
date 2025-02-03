@@ -28,8 +28,8 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, Integer> redisQueue() {
-        RedisTemplate<String, Integer> template = new RedisTemplate<>();
+    public RedisTemplate<String, String> redisQueue() {
+        RedisTemplate<String, String> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory());
         return template;
     }

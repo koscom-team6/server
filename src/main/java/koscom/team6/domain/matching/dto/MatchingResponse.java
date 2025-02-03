@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class MatchingResponse {
 
-    int player1Id;
-    int player2Id;
+    Long player1Id;
+    Long player2Id;
     String matchSessionId;
 }

@@ -31,9 +31,9 @@ public class MatchingController {
     @PostMapping("/matching")
     public ResponseEntity<?> requestMatching(@RequestBody MatchingUserRequest request) {
 
-        matchingService.requestMatching(request.getPlayerId());
+        matchingService.requestMatching(request.getToken());
 
-        return ResponseEntity.ok(request.getPlayerId());
+        return ResponseEntity.ok(request.getToken());
     }
 /*
     @MessageMapping("/typing")
@@ -46,7 +46,7 @@ public class MatchingController {
     }*/
 
     @PostMapping("/arena")
-    public ResponseEntity<ArenaObject> sendMessage(ArenaRequest request) {
+    public ResponseEntity<ArenaObject> sendMessage(@RequestBody ArenaRequest request) {
 
         ArenaObject arenaObject = matchingService.getMessage(request);
 
@@ -54,11 +54,11 @@ public class MatchingController {
     }
 
 
-    @MessageMapping("/matching")
+/*    @MessageMapping("/matching")
     @SendTo("/sub/matching")
     public MatchingResponse startMatching(MatchingStartRequest request) {
 
-        return new MatchingResponse(request.getPlayer1Id(), request.getPlayer2Id(), "" );
-    }
+        return new MatchingResponse(request.get(), request.getPlayer2Id(), "" );
+    }*/
 
 }

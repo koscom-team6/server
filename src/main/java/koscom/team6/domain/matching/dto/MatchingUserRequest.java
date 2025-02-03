@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class MatchingUserRequest {
 
-    private int playerId;
+    private String token;
 
 }

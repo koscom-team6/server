@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MatchingService {
 
-    private final RedisTemplate<String, Integer> redisQueue;
+    private final RedisTemplate<String, String> redisQueue;
     private final RedisTemplate<String, ArenaObject> sessions;
     private final SimpMessagingTemplate messagingTemplate;
     private final JwtUtil jwtUtil;
@@ -35,10 +35,10 @@ public class MatchingService {
     private static final String QUEUE_KEY = "matchingQueue";
 
     @Transactional
-    public void requestMatching(int playerId) {
+    public void requestMatching(String token) {
 
         // Redis 큐에 플레이어 추가
-        redisQueue.opsForList().rightPush(QUEUE_KEY, playerId);
+        redisQueue.opsForList().rightPush(QUEUE_KEY, token);
 
         // 큐의 크기 확인
         Long queueSize = redisQueue.opsForList().size(QUEUE_KEY);
@@ -47,19 +47,22 @@ public class MatchingService {
         if (queueSize != null && queueSize >= 2) {
 
             // 두 명의 플레이어를 큐에서 꺼냄
-            Integer player1Id = redisQueue.opsForList().leftPop(QUEUE_KEY);
-            Integer player2Id = redisQueue.opsForList().leftPop(QUEUE_KEY);
+            String player1Token = redisQueue.opsForList().leftPop(QUEUE_KEY);
+            String player2Token = redisQueue.opsForList().leftPop(QUEUE_KEY);
 
-            System.out.println("player1Id = " + player1Id);
-            System.out.println("player2Id = " + player2Id);
+            System.out.println("player1Token = " + player1Token);
+            System.out.println("player2Token = " + player2Token);
 
-            if (player1Id != null && player2Id != null) {
+            if (player1Token != null && player2Token != null) {
                 String matchSessionId = UUID.randomUUID().toString();
+
+                String username1 = jwtUtil.getUsername(player1Token);
+                String username2 = jwtUtil.getUsername(player2Token);
 
                 ArenaObject object = new ArenaObject();
 
-                UserEntity user1 = userRepository.findById(player1Id).get();
-                UserEntity user2 = userRepository.findById(player2Id).get();
+                UserEntity user1 = userRepository.findByUsername(username1);
+                UserEntity user2 = userRepository.findByUsername(username2);
 
                 object.setUser1(user1);
                 object.setUser2(user2);
@@ -74,7 +77,7 @@ public class MatchingService {
                 saveArenaObject(matchSessionId, object);
 
                 // 매칭 결과를 WebSocket을 통해 전송
-                messagingTemplate.convertAndSend("/sub/matching", new MatchingResponse(player1Id, player2Id, matchSessionId));
+                messagingTemplate.convertAndSend("/sub/matching", new MatchingResponse(user1.getId(), user2.getId(), matchSessionId));
             }
         }
 
