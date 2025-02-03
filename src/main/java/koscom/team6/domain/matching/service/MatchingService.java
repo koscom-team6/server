@@ -101,7 +101,7 @@ public class MatchingService {
         ArenaObject arenaObject = getArenaObject(request.getMatchSessionId());
 
         arenaObject.setMatchSessionId(request.getMatchSessionId());
-        arenaObject.setType(request.getType());
+        arenaObject.setType(request.getType() + " " + user.getNickname());
 
         if (type.equals("solved")) {
 
@@ -125,7 +125,7 @@ public class MatchingService {
                         .rivalAnswer(arenaObject.getContent2())
                         .build());
 
-                arenaObject.setResult1(matchResult.getUserResult());
+                arenaObject.setResult1(matchResult.getUserResult()); // 채점점수
                 arenaObject.setResult2(matchResult.getRivalResult());
 
                 saveArenaObject(request.getMatchSessionId(), arenaObject);

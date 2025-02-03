@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ArenaObject {
 
     private String type;
+
     private String matchSessionId;
 
     private UserEntity user1;
@@ -22,6 +23,7 @@ public class ArenaObject {
     private String content1;
     private String content2;
 
+    // 채점 점수
     private MatchResultVO result1;
     private MatchResultVO result2;
 
