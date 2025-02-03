@@ -11,7 +11,29 @@ services:
       - "8080:8080"
     networks:
       - team6-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/team6db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpassword
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    hostname: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: team6db
+      MYSQL_USER: team6user
+      MYSQL_PASSWORD: team6password
+    ports:
+      - "3306:3306"
+    networks:
+      - team6-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+      -
   nginx:
     depends_on:
       - backend-dev
@@ -30,3 +52,7 @@ services:
 networks:
   team6-network:
     driver: bridge
+    
+volumes:
+  mysql-data:
+    driver: local
