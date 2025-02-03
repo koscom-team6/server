@@ -18,6 +18,11 @@ import koscom.team6.domain.user.dto.CustomUserDetails;
 import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +32,8 @@ public class MatchService {
     private final MatchRepository matchRepository;
     private final MatchHistoryRepository matchHistoryRepository;
     private final MatchAnswerRepository matchAnswerRepository;
+
+    private final WebClient openAIWebClient;
 
     private void createMatch() {
         Match match = Match.of("title", "content", "additionalInfo", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4");
@@ -45,8 +52,8 @@ public class MatchService {
     public PracticeResultResponse getPracticeResult(CustomUserDetails userDetails, PracticeResultRequest practiceResultRequest) {
         UserEntity user = userRepository.findByUsername(userDetails.getUsername());
 
-        // GPT 답안 로직 추가
-        String userAIAnswer = "AIAnswer";
+        String prompt = "아래 요구조건에 맞춰서 대답해줘.";
+        String userAIAnswer = getAIAnswer(practiceResultRequest.getUserAnswer()).block();
 
         Integer userScore = 10;
 
@@ -72,8 +79,8 @@ public class MatchService {
         UserEntity rival = userRepository.findById(matchResultRequest.getRivalId());
 
         // GPT 답안 로직 추가 -> 동점 안나오게 처리
-        String userAIAnswer = "AIAnswer";
-        String rivalAIAnswer = "rivalAIAnswer";
+        String userAIAnswer = getAIAnswer(matchResultRequest.getUserAnswer()).block();
+        String rivalAIAnswer = getAIAnswer(matchResultRequest.getRivalAnswer()).block();
         Integer userScore = 10;
         Integer rivalScore = 0;
 
@@ -105,5 +112,26 @@ public class MatchService {
         int time = user.getSolvedCount();
         int scale = 10;
         return (int) (scale * Math.log(time + 1));
+    }
+
+    private Mono<String> getAIAnswer(String userAnswer) {
+        return openAIWebClient.post()
+                .uri("/chat/completions")
+                .bodyValue(Map.of(
+                        "model", "gpt-4",
+                        "messages", List.of(Map.of("role", "user", "content", userAnswer)),
+                        "max_tokens", 100
+                ))
+                .retrieve()
+                .bodyToMono(Map.class)
+                .map(response -> {
+                    List<Map<String, Object>> choices = (List<Map<String, Object>>) response.get("choices");
+                    if (choices != null && !choices.isEmpty()) {
+                        Map<String, Object> firstChoice = choices.get(0);
+                        Map<String, Object> message = (Map<String, Object>) firstChoice.get("message");
+                        return (String) message.get("content");
+                    }
+                    return "No response from OpenAI.";
+                });
     }
 }
