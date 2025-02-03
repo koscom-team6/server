@@ -5,8 +5,9 @@ services:
     image: person456/team6-backend
     container_name: backend-dev
     hostname: backend-dev
-    expose:
+    # expose:
       # - "8080"
+    ports:
       - "8080:8080"
     networks:
       - team6-network
