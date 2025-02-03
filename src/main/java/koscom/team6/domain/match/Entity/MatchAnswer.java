@@ -23,9 +23,11 @@ public class MatchAnswer {
     private UserEntity user;
 
     @Column
+    @Lob
     private String userAnswer;
 
     @Column
+    @Lob
     private String AIAnswer;
 
     @Builder

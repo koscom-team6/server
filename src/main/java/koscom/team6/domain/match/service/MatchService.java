@@ -36,7 +36,7 @@ public class MatchService {
     private final WebClient openAIWebClient;
 
     private void createMatch() {
-        Match match = Match.of("title", "content", "additionalInfo", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4");
+        Match match = Match.of("title", "content", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4", "tag1", "tag2", "tag3");
         matchRepository.save(match);
         //return match.getId();
     }
