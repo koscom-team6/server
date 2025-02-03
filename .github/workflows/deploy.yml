@@ -3,10 +3,10 @@ name: Deploy to Naver Cloud
 on:
   push:
     branches:
-      - deploy/v1
+      - dev
   pull_request:
     branches:
-      - deploy/v1
+      - dev
       
 permissions:
   contents: read
