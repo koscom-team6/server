@@ -43,10 +43,9 @@ public class MatchController {
     @GetMapping("")
     public ResponseEntity<MatchResponse> getMatch(
             @AuthenticationPrincipal CustomUserDetails userDetails,
-            @RequestParam Long rivalId,
-            @RequestParam Long roomId
+            @RequestParam Long matchId
     ) {
-        MatchResponse matchResponse = matchService.getMatch(userDetails, rivalId, roomId);
+        MatchResponse matchResponse = matchService.getMatch(userDetails, matchId);
         return ResponseEntity.ok(matchResponse);
     }
 

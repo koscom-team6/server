@@ -1,5 +1,7 @@
 package koscom.team6.domain.match.service;
 
+import koscom.team6.domain.match.Entity.MatchReference;
+import koscom.team6.domain.match.repository.MatchReferenceRepository;
 import koscom.team6.domain.user.Entity.UserEntity;
 import koscom.team6.domain.match.Entity.Match;
 import koscom.team6.domain.match.Entity.MatchAnswer;
@@ -30,6 +32,7 @@ public class MatchService {
 
     private final UserRepository userRepository;
     private final MatchRepository matchRepository;
+    private final MatchReferenceRepository matchReferenceRepository;
     private final MatchHistoryRepository matchHistoryRepository;
     private final MatchAnswerRepository matchAnswerRepository;
 
@@ -65,13 +68,13 @@ public class MatchService {
         return PracticeResultResponse.of(user, practiceResultRequest.getUserAnswer(), userAIAnswer, userScore);
     }
 
-    public MatchResponse getMatch(CustomUserDetails userDetails, Long rivalId, Long roomId) {
+    public MatchResponse getMatch(CustomUserDetails userDetails, Long matchId) {
         createMatch();
-        UserEntity rival = userRepository.findById(rivalId);
-        // 문제 선택 로직 추가
-        return matchRepository.findById(1L)
-                .map(MatchResponse::from)
+        Match match = matchRepository.findById(matchId)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found"));
+        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatch(match);
+
+        return MatchResponse.of(match, matchReferences);
     }
 
     public MatchResultResponse getMatchResult(CustomUserDetails userDetails, MatchResultRequest matchResultRequest) {
