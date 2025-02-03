@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Match {
+public class Matching {
 
     @Id
     @GeneratedValue
@@ -52,7 +52,7 @@ public class Match {
     private String tag3;
 
     @Builder
-    private Match(String title, String content, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String tag1, String tag2, String tag3) {
+    private Matching(String title, String content, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String tag1, String tag2, String tag3) {
         this.title = title;
         this.content = content;
         this.imageUrl1 = imageUrl1;
@@ -64,8 +64,8 @@ public class Match {
         this.tag3 = tag3;
     }
 
-    public static Match of(String title, String content, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String tag1, String tag2, String tag3) {
-        return Match.builder()
+    public static Matching of(String title, String content, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String tag1, String tag2, String tag3) {
+        return Matching.builder()
                 .title(title)
                 .content(content)
                 .imageUrl1(imageUrl1)

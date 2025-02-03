@@ -1,12 +1,11 @@
 package koscom.team6.domain.matching.service;
 
 import jakarta.transaction.Transactional;
-import koscom.team6.domain.match.Entity.Match;
+import koscom.team6.domain.match.Entity.Matching;
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
 import koscom.team6.domain.match.dto.response.MatchResultResponse;
 import koscom.team6.domain.match.repository.MatchRepository;
 import koscom.team6.domain.match.service.MatchService;
-import koscom.team6.domain.match.vo.MatchResultVO;
 import koscom.team6.domain.matching.dto.*;
 import koscom.team6.domain.user.Entity.UserEntity;
 import koscom.team6.domain.user.dto.CustomUserDetails;
@@ -18,7 +17,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -66,9 +64,9 @@ public class MatchingService {
                 object.setUser1(user1);
                 object.setUser2(user2);
 
-                Match match = matchRepository.findById(1L).get();
+                Matching matching = matchRepository.findById(1L).get();
 
-                object.setProblemId(match.getId());
+                object.setProblemId(matching.getId());
 
                 object.setSolved1(false);
                 object.setSolved2(false);

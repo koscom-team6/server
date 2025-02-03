@@ -17,7 +17,7 @@ public class MatchHistory {
     private Long id;
 
     @ManyToOne
-    private Match match;
+    private Matching matching;
 
     @ManyToOne
     private UserEntity userA;
@@ -26,15 +26,15 @@ public class MatchHistory {
     private UserEntity userB;
 
     @Builder
-    private MatchHistory(Match match, UserEntity userA, UserEntity userB) {
-        this.match = match;
+    private MatchHistory(Matching matching, UserEntity userA, UserEntity userB) {
+        this.matching = matching;
         this.userA = userA;
         this.userB = userB;
     }
 
-    public static MatchHistory of(Match match, UserEntity userA, UserEntity userB) {
+    public static MatchHistory of(Matching matching, UserEntity userA, UserEntity userB) {
         return MatchHistory.builder()
-                .match(match)
+                .matching(matching)
                 .userA(userA)
                 .userB(userB)
                 .build();

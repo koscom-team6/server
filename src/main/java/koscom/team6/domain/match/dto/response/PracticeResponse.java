@@ -1,7 +1,7 @@
 package koscom.team6.domain.match.dto.response;
 
+import koscom.team6.domain.match.Entity.Matching;
 import koscom.team6.domain.user.Entity.UserEntity;
-import koscom.team6.domain.match.Entity.Match;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,18 +10,18 @@ public class PracticeResponse {
 
     private UserEntity user;
 
-    private Match match;
+    private Matching matching;
 
     @Builder
-    private PracticeResponse(UserEntity user, UserEntity rival, Match match) {
+    private PracticeResponse(UserEntity user, UserEntity rival, Matching matching) {
         this.user = user;
-        this.match = match;
+        this.matching = matching;
     }
 
-    public static PracticeResponse of(UserEntity user, Match match) {
+    public static PracticeResponse of(UserEntity user, Matching matching) {
         return PracticeResponse.builder()
                 .user(user)
-                .match(match)
+                .matching(matching)
                 .build();
     }
 }

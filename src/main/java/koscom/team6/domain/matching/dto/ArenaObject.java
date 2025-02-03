@@ -1,6 +1,5 @@
 package koscom.team6.domain.matching.dto;
 
-import koscom.team6.domain.match.Entity.Match;
 import koscom.team6.domain.match.vo.MatchResultVO;
 import koscom.team6.domain.user.Entity.UserEntity;
 import lombok.AllArgsConstructor;

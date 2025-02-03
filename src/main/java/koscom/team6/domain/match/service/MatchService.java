@@ -3,7 +3,7 @@ package koscom.team6.domain.match.service;
 import koscom.team6.domain.match.Entity.MatchReference;
 import koscom.team6.domain.match.repository.MatchReferenceRepository;
 import koscom.team6.domain.user.Entity.UserEntity;
-import koscom.team6.domain.match.Entity.Match;
+import koscom.team6.domain.match.Entity.Matching;
 import koscom.team6.domain.match.Entity.MatchAnswer;
 import koscom.team6.domain.match.Entity.MatchHistory;
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
@@ -39,9 +39,9 @@ public class MatchService {
     private final WebClient openAIWebClient;
 
     private void createMatch() {
-        Match match = Match.of("title", "content", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4", "tag1", "tag2", "tag3");
-        matchRepository.save(match);
-        //return match.getId();
+        Matching matching = Matching.of("title", "content", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4", "tag1", "tag2", "tag3");
+        matchRepository.save(matching);
+        //return matching.getId();
     }
 
     public PracticeResponse getPractice(CustomUserDetails userDetails) {
@@ -60,8 +60,8 @@ public class MatchService {
 
         Integer userScore = 10;
 
-        Match match = matchRepository.findById(practiceResultRequest.getMatchId())
-                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
+        Matching matching = matchRepository.findById(practiceResultRequest.getMatchId())
+                .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
 
         // 유저 연습게임 횟수 기록
 
@@ -70,11 +70,11 @@ public class MatchService {
 
     public MatchResponse getMatch(CustomUserDetails userDetails, Long matchId) {
         createMatch();
-        Match match = matchRepository.findById(matchId)
-                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
-        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatch(match);
+        Matching matching = matchRepository.findById(matchId)
+                .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
+        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatch(matching);
 
-        return MatchResponse.of(match, matchReferences);
+        return MatchResponse.of(matching, matchReferences);
     }
 
     public MatchResultResponse getMatchResult(CustomUserDetails userDetails, MatchResultRequest matchResultRequest) {
@@ -87,9 +87,9 @@ public class MatchService {
         Integer userScore = 10;
         Integer rivalScore = 0;
 
-        Match match = matchRepository.findById(matchResultRequest.getMatchId())
-                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
-        MatchHistory matchHistory = MatchHistory.of(match, user, rival);
+        Matching matching = matchRepository.findById(matchResultRequest.getMatchId())
+                .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
+        MatchHistory matchHistory = MatchHistory.of(matching, user, rival);
         matchHistoryRepository.save(matchHistory);
 
         MatchAnswer userAnswer = MatchAnswer.of(matchHistory, user, matchResultRequest.getUserAnswer(), userAIAnswer);

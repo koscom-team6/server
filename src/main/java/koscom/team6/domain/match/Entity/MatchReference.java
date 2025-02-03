@@ -19,7 +19,7 @@ public class MatchReference {
     @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "match_id")
-    private Match match;
+    private Matching matching;
 
     @Column
     private String type;

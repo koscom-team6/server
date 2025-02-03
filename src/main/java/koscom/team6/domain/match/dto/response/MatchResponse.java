@@ -1,6 +1,6 @@
 package koscom.team6.domain.match.dto.response;
 
-import koscom.team6.domain.match.Entity.Match;
+import koscom.team6.domain.match.Entity.Matching;
 import koscom.team6.domain.match.Entity.MatchReference;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,13 +32,13 @@ public class MatchResponse {
         this.matchReferences = matchReferences;
     }
 
-    public static MatchResponse of(Match match, List<MatchReference> matchReferences) {
+    public static MatchResponse of(Matching matching, List<MatchReference> matchReferences) {
         return MatchResponse.builder()
-                .matchId(match.getId())
-                .matchTitle(match.getTitle())
-                .matchContent(match.getContent())
-                .images(List.of(match.getImageUrl1(), match.getImageUrl2(), match.getImageUrl3(), match.getImageUrl4()))
-                .tags(List.of(match.getTag1(), match.getTag2(), match.getTag3()))
+                .matchId(matching.getId())
+                .matchTitle(matching.getTitle())
+                .matchContent(matching.getContent())
+                .images(List.of(matching.getImageUrl1(), matching.getImageUrl2(), matching.getImageUrl3(), matching.getImageUrl4()))
+                .tags(List.of(matching.getTag1(), matching.getTag2(), matching.getTag3()))
                 .matchReferences(matchReferences)
                 .build();
     }
