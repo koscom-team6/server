@@ -14,18 +14,22 @@ public class MatchResultResponse {
 
     MatchResultVO rivalResult;
 
+    int addScore;
+
     @Builder
-    private MatchResultResponse(UserEntity user, MatchResultVO userResult, MatchResultVO rivalResult) {
+    private MatchResultResponse(UserEntity user, MatchResultVO userResult, MatchResultVO rivalResult, int addScore) {
         this.user = user;
         this.userResult = userResult;
         this.rivalResult = rivalResult;
+        this.addScore = addScore;
     }
 
-    public static MatchResultResponse of(UserEntity user, MatchResultVO userResult, MatchResultVO rivalResult) {
+    public static MatchResultResponse of(UserEntity user, MatchResultVO userResult, MatchResultVO rivalResult, int addScore) {
         return MatchResultResponse.builder()
                 .user(user)
                 .userResult(userResult)
                 .rivalResult(rivalResult)
+                .addScore(addScore)
                 .build();
     }
 

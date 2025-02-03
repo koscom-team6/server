@@ -96,19 +96,23 @@ public class MatchService {
         MatchAnswer rivalAnswer = MatchAnswer.of(matchHistory, rival, matchResultRequest.getRivalAnswer(), rivalAIAnswer);
         matchAnswerRepository.save(userAnswer);
         matchAnswerRepository.save(rivalAnswer);
-        MatchResultVO userResult = MatchResultVO.of(userAnswer, userScore);
-        MatchResultVO rivalResult = MatchResultVO.of(rivalAnswer, rivalScore);
-
         // 승자/패자 처리
         int addScore = logarithmicScore(user);
-        UserEntity winner = userScore > rivalScore ? user : rival;
-        UserEntity loser = userScore > rivalScore ? rival : user;
-        winner.setWinner(addScore);
-        userRepository.save(winner);
-        loser.setLoser();
-        userRepository.save(loser);
-
-        return MatchResultResponse.of(user, userResult, rivalResult);
+        if (userScore > rivalScore) {
+            user.setWinner(addScore);
+            userRepository.save(user);
+            rival.setLoser();
+            userRepository.save(rival);
+        }
+        else {
+            rival.setWinner(addScore);
+            userRepository.save(rival);
+            user.setLoser();
+            userRepository.save(user);
+        }
+        MatchResultVO userResult = MatchResultVO.of(userAnswer, userScore);
+        MatchResultVO rivalResult = MatchResultVO.of(rivalAnswer, rivalScore);
+        return MatchResultResponse.of(user, userResult, rivalResult, addScore);
     }
 
     private int logarithmicScore(UserEntity user) {
