@@ -12,11 +12,11 @@ services:
       - "8080:8080"
     networks:
       - team6-network
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/team6db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/team6db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: rootpassword
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
   nginx:
     depends_on:
