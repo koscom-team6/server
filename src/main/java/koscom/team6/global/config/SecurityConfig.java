@@ -81,7 +81,8 @@ public class SecurityConfig {
         // 경로별 Authorization
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/ws-match/**" ,"/ws-chat/**").permitAll()
+                        .requestMatchers("/ws-match/**" ,"/ws-chat/**").permitAll() // 2025.02.03
+                        .requestMatchers("/h2-console").permitAll() // 2025.02.03
                         .requestMatchers("/api").authenticated()
                         .anyRequest().permitAll());
 

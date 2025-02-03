@@ -26,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        if (requestURI.startsWith("/ws-") || requestURI.startsWith("/matching")) {
+        if (requestURI.startsWith("/ws-") || requestURI.startsWith("/matching") || requestURI.startsWith("/h2-")) {
             filterChain.doFilter(request, response);
             return;
         }
