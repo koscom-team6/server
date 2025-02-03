@@ -2,6 +2,9 @@ version: "3"
 
 services:
   backend-dev:
+    restart: always
+    depends_on:
+      - mysql
     image: person456/team6-backend
     container_name: backend-dev
     hostname: backend-dev
