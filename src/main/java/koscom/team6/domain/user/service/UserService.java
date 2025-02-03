@@ -5,11 +5,10 @@ import koscom.team6.domain.user.dto.JoinRequest;
 import koscom.team6.domain.user.dto.UserRankingResponse;
 import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,18 +43,19 @@ public class UserService {
         return saved;
     }
 
-    public List<UserRankingResponse> showRanking() {
+    public Page<UserRankingResponse> showRanking(Pageable pageable) {
 
-        List<UserEntity> users = userRepository.findAllByOrderByScoreDescSolvedCountAsc();
+        Page<UserEntity> users = userRepository.findAllByOrderByScoreDescWinningCountAsc(pageable);
 
-        return users.stream()
-                .map(userEntity -> {
-                    UserRankingResponse response = new UserRankingResponse();
-                    response.setNickname(userEntity.getNickname());
-                    response.setScore(userEntity.getScore());
-                    response.setSolvedCount(userEntity.getSolvedCount());
-                    return response;
-                })
-                .collect(Collectors.toList());
+        return users.map(userEntity -> {
+            UserRankingResponse response = new UserRankingResponse();
+            response.setNickname(userEntity.getNickname());
+            response.setScore(userEntity.getScore());
+            response.setSolvedCount(userEntity.getSolvedCount());
+            response.setWinningCount(userEntity.getWinningCount());
+            response.setImageUrl(userEntity.getImage());
+            response.setTotalCount(userRepository.findAll().size());
+            return response;
+        });
     }
 }
