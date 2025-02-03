@@ -10,5 +10,8 @@ public class UserRankingResponse {
     String nickname;
     int score;
     int solvedCount;
+    int winningCount;
+    String imageUrl;
+    int totalCount;
 
 }
