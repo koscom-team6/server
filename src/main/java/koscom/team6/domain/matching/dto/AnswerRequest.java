@@ -8,6 +8,11 @@ import lombok.Data;
 public class AnswerRequest {
 
     int playerId;
+
     String content;
+
+    boolean player1answer = false;
+
+    boolean player2answer = false;
 
 }
