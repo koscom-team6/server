@@ -34,8 +34,6 @@ services:
       - "3306:3306"
     networks:
       - team6-network
-    volumes:
-      - mysql-data:/var/lib/mysql
   nginx:
     depends_on:
       - backend-dev
@@ -54,7 +52,3 @@ services:
 networks:
   team6-network:
     driver: bridge
-
-volumes:
-  mysql-data:
-    driver: local
