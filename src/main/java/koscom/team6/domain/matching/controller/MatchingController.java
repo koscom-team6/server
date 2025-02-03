@@ -36,6 +36,15 @@ public class MatchingController {
         return ResponseEntity.ok(request.getPlayerId());
     }
 
+    @MessageMapping("/typing")
+    @SendTo("/sub/typing")
+    public TypingResponseStatus handleTypingStatus(TypingRequestStatus status) {
+
+        TypingResponseStatus responseStatus = new TypingResponseStatus(status.getPlayerId(), true);
+
+        return responseStatus;
+    }
+
     @MessageMapping("/matching")
     @SendTo("/sub/matching")
     public MatchingResponse startMatching(MatchingStartRequest request) {
