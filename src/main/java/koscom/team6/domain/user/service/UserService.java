@@ -23,6 +23,7 @@ public class UserService {
         String username = joinRequest.getUsername();
         String password = joinRequest.getPassword();
         String nickname = joinRequest.getNickname();
+        String imageUrl = joinRequest.getImageUrl();
 
 /*        Boolean isExist = userRepository.existsByUsername(username);
 
@@ -38,6 +39,7 @@ public class UserService {
         user.setNickname(nickname);
         user.setScore(0);
         user.setSolvedCount(0);
+        user.setImage(imageUrl);
 
         UserEntity saved = userRepository.save(user);
 
@@ -57,5 +59,11 @@ public class UserService {
                     return response;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public UserEntity getUser(String username) {
+        UserEntity user = userRepository.findByUsername(username);
+
+        return user;
     }
 }
