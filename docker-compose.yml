@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend-dev:
-    image: koscom/team6-backend
+    image: person456/team6-backend
     container_name: backend-dev
     hostname: backend-dev
     expose:
