@@ -96,6 +96,7 @@ public class MatchService {
         MatchAnswer rivalAnswer = MatchAnswer.of(matchHistory, rival, matchResultRequest.getRivalAnswer(), rivalAIAnswer);
         matchAnswerRepository.save(userAnswer);
         matchAnswerRepository.save(rivalAnswer);
+
         // 승자/패자 처리
         int addScore = logarithmicScore(user);
         if (userScore > rivalScore) {
@@ -118,7 +119,8 @@ public class MatchService {
     private int logarithmicScore(UserEntity user) {
         int time = user.getSolvedCount();
         int scale = 10;
-        return (int) (scale * Math.log(time + 1));
+//        return (int) (scale * Math.log(time + 1));
+        return 10;
     }
 
     private Mono<String> getAIAnswer(String userAnswer) {

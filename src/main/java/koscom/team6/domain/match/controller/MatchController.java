@@ -55,6 +55,8 @@ public class MatchController {
             @RequestBody MatchResultRequest matchResultRequest
     ) {
         MatchResultResponse matchResultResponse = matchService.getMatchResult(userDetails, matchResultRequest);
+
+//        System.out.println("matchResultResponse.get = " + matchResultResponse.get);
         return ResponseEntity.ok(matchResultResponse);
     }
 }

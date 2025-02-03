@@ -30,14 +30,18 @@ public class UserEntity {
 
     private String image;
 
+    private int addScore;
+
     public void setWinner(int score) {
         this.score += score;
         this.solvedCount += 1;
         this.winningCount += 1;
+        this.addScore = score;
     }
 
     public void setLoser() {
         this.solvedCount += 1;
+        this.score = 0;
     }
 
 }
