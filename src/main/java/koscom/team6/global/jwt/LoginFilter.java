@@ -8,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import koscom.team6.domain.user.dto.CustomUserDetails;
+import koscom.team6.domain.user.dto.LoginResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,9 +61,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("Authorization", "Bearer " + token);
 
+        LoginResponse loginResponse = new LoginResponse(username);
+
         String result = null;
         try {
-            result = objectMapper.writeValueAsString(customUserDetails);
+            result = objectMapper.writeValueAsString(loginResponse);
             response.getWriter().write(result);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
