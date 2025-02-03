@@ -95,7 +95,6 @@ public class MatchingService {
     public ArenaObject getMessage(ArenaRequest request) {
 
         String type = request.getType();
-        ArenaResponse response = new ArenaResponse();
         String username = jwtUtil.getUsername(request.getToken());
         UserEntity user = userRepository.findByUsername(username);
 

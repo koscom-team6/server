@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MatchReferenceRepository extends JpaRepository<MatchReference, Long> {
-    List<MatchReference> findAllByMatch(Matching matching);
+    List<MatchReference> findAllByMatching(Matching matching);
 }

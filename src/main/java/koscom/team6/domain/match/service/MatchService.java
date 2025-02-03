@@ -72,7 +72,7 @@ public class MatchService {
         createMatch();
         Matching matching = matchRepository.findById(matchId)
                 .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
-        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatch(matching);
+        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatching(matching);
 
         return MatchResponse.of(matching, matchReferences);
     }
