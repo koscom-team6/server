@@ -35,7 +35,7 @@ public class MatchingController {
 
         return ResponseEntity.ok(request.getPlayerId());
     }
-
+/*
     @MessageMapping("/typing")
     @SendTo("/sub/typing")
     public TypingResponseStatus handleTypingStatus(TypingRequestStatus status) {
@@ -43,7 +43,16 @@ public class MatchingController {
         TypingResponseStatus responseStatus = new TypingResponseStatus(status.getPlayerId(), true);
 
         return responseStatus;
+    }*/
+
+    @PostMapping("/arena")
+    public ResponseEntity<ArenaObject> sendMessage(ArenaRequest request) {
+
+        ArenaObject arenaObject = matchingService.getMessage(request);
+
+        return ResponseEntity.ok(arenaObject);
     }
+
 
     @MessageMapping("/matching")
     @SendTo("/sub/matching")
