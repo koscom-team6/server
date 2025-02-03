@@ -38,6 +38,7 @@ dependencies {
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 
 	implementation 'com.h2database:h2'
+	implementation 'mysql:mysql-connector-java:8.0.33'
 
 	// Spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
