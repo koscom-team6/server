@@ -3,6 +3,7 @@ networks:
   shared-network:
     driver: bridge
 
+
 services:
   backend-dev:
     restart: always
@@ -35,7 +36,6 @@ services:
       - shared-network
     ports:
       - "80:80"
-      -
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -46,8 +46,13 @@ services:
       MYSQL_DATABASE: team6db
       MYSQL_USER: team6user
       MYSQL_PASSWORD: team6password
+      TZ: Asia/Seoul
+    volumes:
+      - /var/www/mysql/data:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
       - shared-network
 
+volumes:
+  mysql-data:
