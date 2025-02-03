@@ -34,8 +34,8 @@ public class UserController {
 
         String username = jwtUtil.getUsername(token.getToken());
 
-        userService.getUser(username);
+        UserEntity user = userService.getUser(username);
 
-        return ResponseEntity.ok(username);
+        return ResponseEntity.ok(user);
     }
 }
