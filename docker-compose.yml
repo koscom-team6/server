@@ -35,4 +35,4 @@ services:
 
 networks:
   team6-network:
-    driver: external
+    driver: bridge
