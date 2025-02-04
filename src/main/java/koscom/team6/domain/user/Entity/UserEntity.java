@@ -28,6 +28,7 @@ public class UserEntity {
 
     private int winningCount;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String image;
 
     private int addScore;
