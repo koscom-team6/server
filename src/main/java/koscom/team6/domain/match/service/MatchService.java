@@ -2,6 +2,7 @@ package koscom.team6.domain.match.service;
 
 import koscom.team6.domain.match.Entity.MatchReference;
 import koscom.team6.domain.match.repository.MatchReferenceRepository;
+import koscom.team6.domain.matching.dto.ArenaObject;
 import koscom.team6.domain.user.Entity.UserEntity;
 import koscom.team6.domain.match.Entity.Matching;
 import koscom.team6.domain.match.Entity.MatchAnswer;
@@ -19,6 +20,7 @@ import koscom.team6.domain.match.vo.MatchResultVO;
 import koscom.team6.domain.user.dto.CustomUserDetails;
 import koscom.team6.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -35,6 +37,7 @@ public class MatchService {
     private final MatchReferenceRepository matchReferenceRepository;
     private final MatchHistoryRepository matchHistoryRepository;
     private final MatchAnswerRepository matchAnswerRepository;
+    private final RedisTemplate<String, ArenaObject> sessions;
 
     private final WebClient openAIWebClient;
 
@@ -68,9 +71,11 @@ public class MatchService {
         return PracticeResultResponse.of(user, practiceResultRequest.getUserAnswer(), userAIAnswer, userScore);
     }
 
-    public MatchResponse getMatch(CustomUserDetails userDetails, Long matchId) {
-        createMatch();
-        Matching matching = matchRepository.findById(matchId)
+    public MatchResponse getMatch(String matchSessionId) {
+//        createMatch();
+
+        ArenaObject arenaObject = sessions.opsForValue().get(matchSessionId);
+        Matching matching = matchRepository.findById(arenaObject.getProblemId())
                 .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
         List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatching(matching);
 

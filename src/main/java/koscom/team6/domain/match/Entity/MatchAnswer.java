@@ -22,12 +22,10 @@ public class MatchAnswer {
     @ManyToOne
     private UserEntity user;
 
-    @Column
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String userAnswer;
 
-    @Column
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String AIAnswer;
 
     @Builder

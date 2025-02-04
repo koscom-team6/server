@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
 import java.util.UUID;
 
 @Slf4j
@@ -67,7 +68,13 @@ public class MatchingService {
                 object.setUser1(user1);
                 object.setUser2(user2);
 
-                Matching matching = matchRepository.findById(1L).get();
+                long count = matchRepository.count();
+                Random random = new Random();
+                int index = random.nextInt((int) count) + 1;
+
+                System.out.println("index = " + index);
+
+                Matching matching = matchRepository.findById((long) index).get();
 
                 object.setProblemId(matching.getId());
 
