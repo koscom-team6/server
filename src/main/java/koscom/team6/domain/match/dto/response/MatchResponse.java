@@ -37,7 +37,7 @@ public class MatchResponse {
                 .matchId(matching.getId())
                 .matchTitle(matching.getTitle())
                 .matchContent(matching.getContent())
-                .images(List.of(matching.getImageUrl1(), matching.getImageUrl2(), matching.getImageUrl3(), matching.getImageUrl4()))
+                .images(List.of(matching.getImageUrl1(), matching.getImageUrl2(), matching.getImageUrl3()))
                 .tags(List.of(matching.getTag1(), matching.getTag2(), matching.getTag3()))
                 .matchReferences(matchReferences)
                 .build();

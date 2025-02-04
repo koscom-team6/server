@@ -178,8 +178,8 @@ public class MatchService {
         String problem = matching.getContent();
         String description = matching.getImageDescription1() + " \n"
                 + matching.getImageDescription2() + " \n"
-                + matching.getImageDescription3() + " \n"
-                + matching.getImageDescription4() + " \n";
+                + matching.getImageDescription3() + " \n";
+//                + matching.getImageDescription4() + " \n";
         String userAnswerDescription = "사용자 답안:\n" + userAnswer + "\n\n";
 
         String condition = "요구 조건\n" +
@@ -225,8 +225,8 @@ public class MatchService {
         String problem = matching.getContent();
         String description = matching.getImageDescription1() + " \n"
                 + matching.getImageDescription2() + " \n"
-                + matching.getImageDescription3() + " \n"
-                + matching.getImageDescription4() + " \n";
+                + matching.getImageDescription3() + " \n";
+//                + matching.getImageDescription4() + " \n";
         String answers = "사용자 답안: " + userAnswer + "\n\n"
                 + "상대방 답안: " + rivalAnswer + "\n\n";
 

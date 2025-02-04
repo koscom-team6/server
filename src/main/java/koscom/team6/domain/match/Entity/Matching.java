@@ -46,14 +46,14 @@ public class Matching {
     @Column
     @Nullable
     private String imageDescription3;
-
-    @Column
-    @Nullable
-    private String imageUrl4;
-
-    @Column
-    @Nullable
-    private String imageDescription4;
+//
+//    @Column
+//    @Nullable
+//    private String imageUrl4;
+//
+//    @Column
+//    @Nullable
+//    private String imageDescription4;
 
     @Column
     @Nullable
@@ -92,7 +92,7 @@ public class Matching {
     private String referenceLink3;
 
     @Builder
-    private Matching(String title, String content, String imageUrl1, String imageDescription1, String imageUrl2, String imageDescription2, String imageUrl3, String imageDescription3, String imageUrl4, String imageDescription4, String tag1, String tag2, String tag3, String reference1, String referenceLink1, String reference2, String referenceLink2, String reference3, String referenceLink3) {
+    private Matching(String title, String content, String imageUrl1, String imageDescription1, String imageUrl2, String imageDescription2, String imageUrl3, String imageDescription3, String tag1, String tag2, String tag3, String reference1, String referenceLink1, String reference2, String referenceLink2, String reference3, String referenceLink3) {
         this.title = title;
         this.content = content;
         this.imageUrl1 = imageUrl1;
@@ -101,8 +101,8 @@ public class Matching {
         this.imageDescription2 = imageDescription2;
         this.imageUrl3 = imageUrl3;
         this.imageDescription3 = imageDescription3;
-        this.imageUrl4 = imageUrl4;
-        this.imageDescription4 = imageDescription4;
+//        this.imageUrl4 = imageUrl4;
+//        this.imageDescription4 = imageDescription4;
         this.tag1 = tag1;
         this.tag2 = tag2;
         this.tag3 = tag3;
@@ -114,7 +114,7 @@ public class Matching {
         this.referenceLink3 = referenceLink3;
     }
 
-    public static Matching of(String title, String content, String imageUrl1, String imageDescription1, String imageUrl2, String imageDescription2, String imageUrl3, String imageDescription3, String imageUrl4, String imageDescription4, String tag1, String tag2, String tag3, String reference1, String referenceLink1, String reference2, String referenceLink2, String reference3, String referenceLink3) {
+    public static Matching of(String title, String content, String imageUrl1, String imageDescription1, String imageUrl2, String imageDescription2, String imageUrl3, String imageDescription3, String tag1, String tag2, String tag3, String reference1, String referenceLink1, String reference2, String referenceLink2, String reference3, String referenceLink3) {
         return Matching.builder()
                 .title(title)
                 .content(content)
@@ -124,8 +124,8 @@ public class Matching {
                 .imageDescription2(imageDescription2)
                 .imageUrl3(imageUrl3)
                 .imageDescription3(imageDescription3)
-                .imageUrl4(imageUrl4)
-                .imageDescription4(imageDescription4)
+//                .imageUrl4(imageUrl4)
+//                .imageDescription4(imageDescription4)
                 .tag1(tag1)
                 .tag2(tag2)
                 .tag3(tag3)
