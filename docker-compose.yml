@@ -19,10 +19,11 @@ services:
     networks:
       - shared-network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/team6db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-qakba-fkr.cdb.fin-ntruss.com:3306/team6
+      SPRING_DATASOURCE_USERNAME: team6
+      SPRING_DATASOURCE_PASSWORD: team6team6!
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
 
   nginx:
     depends_on:
