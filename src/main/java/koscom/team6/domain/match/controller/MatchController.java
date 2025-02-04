@@ -1,11 +1,9 @@
 package koscom.team6.domain.match.controller;
 
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
+import koscom.team6.domain.match.dto.request.MatchingSaveRequest;
 import koscom.team6.domain.match.dto.request.PracticeResultRequest;
-import koscom.team6.domain.match.dto.response.MatchResponse;
-import koscom.team6.domain.match.dto.response.MatchResultResponse;
-import koscom.team6.domain.match.dto.response.PracticeResponse;
-import koscom.team6.domain.match.dto.response.PracticeResultResponse;
+import koscom.team6.domain.match.dto.response.*;
 import koscom.team6.domain.match.service.MatchService;
 import koscom.team6.domain.user.dto.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -58,5 +56,14 @@ public class MatchController {
 
 //        System.out.println("matchResultResponse.get = " + matchResultResponse.get);
         return ResponseEntity.ok(matchResultResponse);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<MatchingSaveResponse> saveMatch(
+            @RequestBody MatchingSaveRequest request
+    ) {
+        MatchingSaveResponse matchingSaveResponse = matchService.createMatch(request);
+
+        return ResponseEntity.ok(matchingSaveResponse);
     }
 }

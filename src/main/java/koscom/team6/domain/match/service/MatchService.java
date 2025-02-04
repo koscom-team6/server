@@ -1,6 +1,8 @@
 package koscom.team6.domain.match.service;
 
 import koscom.team6.domain.match.Entity.MatchReference;
+import koscom.team6.domain.match.dto.request.MatchingSaveRequest;
+import koscom.team6.domain.match.dto.response.*;
 import koscom.team6.domain.match.repository.MatchReferenceRepository;
 import koscom.team6.domain.matching.dto.ArenaObject;
 import koscom.team6.domain.user.Entity.UserEntity;
@@ -9,10 +11,6 @@ import koscom.team6.domain.match.Entity.MatchAnswer;
 import koscom.team6.domain.match.Entity.MatchHistory;
 import koscom.team6.domain.match.dto.request.MatchResultRequest;
 import koscom.team6.domain.match.dto.request.PracticeResultRequest;
-import koscom.team6.domain.match.dto.response.MatchResponse;
-import koscom.team6.domain.match.dto.response.MatchResultResponse;
-import koscom.team6.domain.match.dto.response.PracticeResponse;
-import koscom.team6.domain.match.dto.response.PracticeResultResponse;
 import koscom.team6.domain.match.repository.MatchAnswerRepository;
 import koscom.team6.domain.match.repository.MatchHistoryRepository;
 import koscom.team6.domain.match.repository.MatchRepository;
@@ -41,14 +39,27 @@ public class MatchService {
 
     private final WebClient openAIWebClient;
 
-    private void createMatch() {
-        Matching matching = Matching.of("title", "content", "imageUrl1", "imageUrl2", "imageUrl3", "imageUrl4", "tag1", "tag2", "tag3");
-        matchRepository.save(matching);
+    public MatchingSaveResponse createMatch(MatchingSaveRequest request) {
+        Matching matching = Matching.of(request.getTitle(),
+                request.getContent(),
+                request.getImageUrl1(),
+                request.getImageUrl2(),
+                request.getImageUrl3(),
+                request.getImageUrl4(),
+                request.getTag1(),
+                request.getTag2(),
+                request.getTag3());
+
+        Matching saved = matchRepository.save(matching);
         //return matching.getId();
+
+        MatchingSaveResponse response = new MatchingSaveResponse(saved.getId(), saved.getTitle(), saved.getContent(), saved.getImageUrl1(),
+                saved.getImageUrl2(), saved.getImageUrl3(), saved.getImageUrl4(), saved.getTag1(), saved.getTag2(), saved.getTag3());
+        return response;
     }
 
     public PracticeResponse getPractice(CustomUserDetails userDetails) {
-        createMatch();
+//        createMatch(request);
         UserEntity user = userRepository.findByUsername(userDetails.getUsername());
         return matchRepository.findById(1L)
                 .map(practice -> PracticeResponse.of(user, practice))
