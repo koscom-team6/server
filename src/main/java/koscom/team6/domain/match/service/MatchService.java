@@ -102,26 +102,22 @@ public class MatchService {
 
         List<MatchReferenceResponse> responses = new ArrayList<>();
 
-        if (!matching.getReference1().isBlank()) {
-            responses.add(
-                    MatchReferenceResponse.builder()
-                            .referText(matching.getReference1())
-                            .referLink(matching.getReferenceLink1())
-                            .build());
-        } else if (!matching.getReference2().isBlank()) {
-            responses.add(
-                    MatchReferenceResponse.builder()
-                            .referText(matching.getReference2())
-                            .referLink(matching.getReferenceLink2())
-                            .build());
-        } else if (!matching.getReference3().isBlank()) {
-            responses.add(
-                    MatchReferenceResponse.builder()
-                            .referText(matching.getReference3())
-                            .referLink(matching.getReferenceLink3())
-                            .build());
-        }
+        responses.add(
+                MatchReferenceResponse.builder()
+                        .referText(matching.getReference1())
+                        .referLink(matching.getReferenceLink1())
+                        .build());
+        responses.add(
+                MatchReferenceResponse.builder()
+                        .referText(matching.getReference2())
+                        .referLink(matching.getReferenceLink2())
+                        .build());
 
+        responses.add(
+                MatchReferenceResponse.builder()
+                        .referText(matching.getReference3())
+                        .referLink(matching.getReferenceLink3())
+                        .build());
 
         return MatchResponse.of(matching, responses);
     }
