@@ -118,9 +118,11 @@ public class MatchService {
 
     private int logarithmicScore(UserEntity user) {
         int time = user.getSolvedCount();
-        int scale = 10;
-//        return (int) (scale * Math.log(time + 1));
-        return 10;
+        int maxScore = 30;
+        int minScore = 5;
+        double decayFactor = 3.0;
+
+        return (int) (minScore + (maxScore - minScore) / (1 + Math.log(time + 1) / decayFactor));
     }
 
     private Mono<String> getAIAnswer(String userAnswer) {

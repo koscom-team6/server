@@ -119,7 +119,7 @@ public class MatchingService {
                 CustomUserDetails userDetails1 = new CustomUserDetails(arenaObject.getUser1());
 
                 MatchResultResponse matchResult = matchService.getMatchResult(userDetails1, MatchResultRequest.builder()
-                        .matchId(arenaObject.getUser1().getId())
+                        .matchId(arenaObject.getProblemId())
                         .rivalId(arenaObject.getUser2().getId())
                         .userAnswer(arenaObject.getContent1())
                         .rivalAnswer(arenaObject.getContent2())
