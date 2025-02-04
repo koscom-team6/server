@@ -24,10 +24,10 @@ public class MatchingSaveRequest {
     private String imageUrl3;
 
     private String imageDescription3;
-
-    private String imageUrl4;
-
-    private String imageDescription4;
+//
+//    private String imageUrl4;
+//
+//    private String imageDescription4;
 
     private String tag1;
 

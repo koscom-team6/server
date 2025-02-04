@@ -27,9 +27,9 @@ public class MatchingSaveResponse {
 
     private String imageDes3;
 
-    private String imageUrl4;
-
-    private String imageDes4;
+//    private String imageUrl4;
+//
+//    private String imageDes4;
 
     private String tag1;
 
