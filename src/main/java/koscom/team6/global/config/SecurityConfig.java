@@ -54,8 +54,8 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of(SERVER_URL));
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedOrigins(List.of("http://221.168.38.193"));
+        config.setAllowedOrigins(List.of("http://localhost:5173", "http://221.168.38.193"));
+//        config.setAllowedOrigins(List.of("http://221.168.38.193"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));
