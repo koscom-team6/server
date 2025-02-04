@@ -25,6 +25,7 @@ import reactor.core.publisher.Mono;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -46,28 +47,29 @@ public class MatchService {
         Matching matching = Matching.of(
                 request.getTitle(),
                 request.getContent(),
-                request.getImageUrl1(),
-                request.getImageDescription1(),
-                request.getImageUrl2(),
-                request.getImageDescription2(),
-                request.getImageUrl3(),
-                request.getImageDescription3(),
-                request.getImageUrl4(),
-                request.getImageDescription4(),
+                request.getImageUrl1(), request.getImageDescription1(),
+                request.getImageUrl2(), request.getImageDescription2(),
+                request.getImageUrl3(), request.getImageDescription3(),
+                request.getImageUrl4(), request.getImageDescription4(),
                 request.getTag1(),
                 request.getTag2(),
                 request.getTag3(),
-                request.getReference1(),
-                request.getReferenceLink1(),
-                request.getReference2(),
-                request.getReferenceLink2(),
-                request.getReference3(),
-                request.getReferenceLink3());
+                request.getReference1(), request.getReferenceLink1(),
+                request.getReference2(), request.getReferenceLink2(),
+                request.getReference3(), request.getReferenceLink3());
 
         Matching saved = matchRepository.save(matching);
 
-        MatchingSaveResponse response = new MatchingSaveResponse(saved.getId(), saved.getTitle(), saved.getContent(), saved.getImageUrl1(),
-                saved.getImageUrl2(), saved.getImageUrl3(), saved.getImageUrl4(), saved.getTag1(), saved.getTag2(), saved.getTag3());
+        MatchingSaveResponse response = new MatchingSaveResponse(
+                saved.getId(), saved.getTitle(), saved.getContent(),
+                saved.getImageUrl1(), saved.getImageDescription1(),
+                saved.getImageUrl2(), saved.getImageDescription2(),
+                saved.getImageUrl3(), saved.getImageDescription3(),
+                saved.getImageUrl4(), saved.getImageDescription4(),
+                saved.getTag1(), saved.getTag2(), saved.getTag3(),
+                saved.getReference1(), saved.getReferenceLink1(),
+                saved.getReference2(), saved.getReferenceLink2(),
+                saved.getReference3(), saved.getReferenceLink3());
         return response;
     }
 
@@ -98,9 +100,31 @@ public class MatchService {
         ArenaObject arenaObject = sessions.opsForValue().get(matchSessionId);
         Matching matching = matchRepository.findById(arenaObject.getProblemId())
                 .orElseThrow(() -> new IllegalArgumentException("Matching not found"));
-        List<MatchReference> matchReferences = matchReferenceRepository.findAllByMatching(matching);
 
-        return MatchResponse.of(matching, matchReferences);
+        List<MatchReferenceResponse> responses = new ArrayList<>();
+
+        if (!matching.getReference1().isBlank()) {
+            responses.add(
+                    MatchReferenceResponse.builder()
+                            .referText(matching.getReference1())
+                            .referLink(matching.getReferenceLink1())
+                            .build());
+        } else if (!matching.getReference2().isBlank()) {
+            responses.add(
+                    MatchReferenceResponse.builder()
+                            .referText(matching.getReference2())
+                            .referLink(matching.getReferenceLink2())
+                            .build());
+        } else if (!matching.getReference3().isBlank()) {
+            responses.add(
+                    MatchReferenceResponse.builder()
+                            .referText(matching.getReference3())
+                            .referLink(matching.getReferenceLink3())
+                            .build());
+        }
+
+
+        return MatchResponse.of(matching, responses);
     }
 
     public MatchResultResponse getMatchResult(CustomUserDetails userDetails, MatchResultRequest matchResultRequest) {

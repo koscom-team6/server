@@ -20,10 +20,10 @@ public class MatchResponse {
 
     private List<String> tags;
 
-    private List<MatchReference> matchReferences;
+    private List<MatchReferenceResponse> matchReferences;
 
     @Builder
-    private MatchResponse(Long matchId, String matchTitle, String matchContent, List<String> images, List<String> tags, List<MatchReference> matchReferences) {
+    private MatchResponse(Long matchId, String matchTitle, String matchContent, List<String> images, List<String> tags, List<MatchReferenceResponse> matchReferences) {
         this.matchId = matchId;
         this.matchTitle = matchTitle;
         this.matchContent = matchContent;
@@ -32,7 +32,7 @@ public class MatchResponse {
         this.matchReferences = matchReferences;
     }
 
-    public static MatchResponse of(Matching matching, List<MatchReference> matchReferences) {
+    public static MatchResponse of(Matching matching, List<MatchReferenceResponse> matchReferences) {
         return MatchResponse.builder()
                 .matchId(matching.getId())
                 .matchTitle(matching.getTitle())
