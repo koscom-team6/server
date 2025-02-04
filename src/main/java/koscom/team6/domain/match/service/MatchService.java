@@ -1,6 +1,5 @@
 package koscom.team6.domain.match.service;
 
-import koscom.team6.domain.match.Entity.MatchReference;
 import koscom.team6.domain.match.dto.request.MatchingSaveRequest;
 import koscom.team6.domain.match.dto.response.*;
 import koscom.team6.domain.match.repository.MatchReferenceRepository;
@@ -236,7 +235,9 @@ public class MatchService {
                 + "상대방 답안: " + rivalAnswer + "\n\n";
 
         String condition = "요구 조건\n" +
-                "1. 사용자가 보고 배울 수 있도록 각 답안에 대한 피드백을 작성해줘. 감점 사유와 가점 사유를 함께 알려줘.\n" +
+                "1. 사용자가 보고 배울 수 있도록 각 답안에 대한 피드백을 작성해줘. " +
+                "감점 사유와 가점 사유를 함께 알려줘. " +
+                "만점이 아니라면 어떤 키워드를 포함하면 더 좋을 지 함께 피드백해줘.\n" +
                 "2. 아래 조건에 맞춰 예시 답안을 채점해줘. \n" +
                 "- 최대점수=100, 최소점수=60, \n" +
                 "- 동점 없음\n" +
